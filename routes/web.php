@@ -13,15 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 //Админка
 Route::group([
     'prefix' => '/admin',
-    'as' => 'admin::news::',
-    'namespace' => '\App\Http\Controllers\Admin\News'
+    'as' => 'admin::',
+    'namespace' => '\App\Http\Controllers\Admin'
 ], function () {
     Route::get('/', 'NewsController@index')
         ->name('index');
@@ -43,11 +43,26 @@ Route::group([
 //  Открытие формы и создание новостной категории
     Route::match(['GET', 'POST'], '/addcategory', 'NewsController@createCategory')
         ->name('createCategory');
-
 });
 
-Route::get('/news', '\App\Http\Controllers\NewsController@index')->name('news');
+//    Route::get('/news', '\App\Http\Controllers\NewsController@index')
+//        ->name('news');
+//
+//    Route::get('/categories', '\App\Http\Controllers\NewsController@showCategories')
+//        ->name('categories');
 
+Route::group([
+    'prefix' => '/news',
+    'as' => 'news::',
+    'namespace' => '\App\Http\Controllers'
+], function () {
+    Route::get('/', 'NewsController@index')
+        ->name('news');
+    Route::get('/categories', 'NewsController@showCategories')
+        ->name('categories');
+    Route::get('/category_{id}', 'NewsController@showNewsByCategory');
+    Route::get('/news_{id}', 'NewsController@showNews');
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

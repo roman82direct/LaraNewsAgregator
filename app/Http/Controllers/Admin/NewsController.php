@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\News;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\News;
@@ -11,7 +11,7 @@ class NewsController extends Controller
     public function index(){
         $news = News::query()
             ->orderBy('updated_at', 'desc')
-            ->paginate(3);
+            ->paginate(5);
         return view('admin', ['news' => $news]);
     }
 }

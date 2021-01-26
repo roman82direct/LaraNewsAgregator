@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\Models\NewsCategories;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -16,8 +17,25 @@ class NewsController extends Controller
     {
         $news = News::query()
             ->orderBy('updated_at', 'desc')
-            ->paginate(5);
-        return view('news', ['news' => $news]);
+            ->paginate(10);
+        return view('news', ['news' => $news, 'id'=>0]);
+    }
+
+    public function showCategories(){
+        $categories = NewsCategories::query()
+        ->get();
+//        dd($categories);
+        return view('newsCategories', ['categories'=>$categories]);
+    }
+    public function showNewsByCategory($id){
+        $news = News::whereCategoryId($id)
+        ->get();
+        return view('news', ['news' => $news, 'id'=>$id]);
+    }
+
+    public function showNews($id){
+        $newsItem = News::find($id);
+        return view('newsItem', ['newsItem'=>$newsItem, 'id'=>$newsItem->category_id]);
     }
 
     /**
