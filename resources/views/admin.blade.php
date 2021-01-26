@@ -11,7 +11,8 @@
         <div class="col-md-8">
             <h1>Новости</h1>
 
-{{--            <a style="margin-bottom: 10px" class="btn btn-success" href="{{route('admin::news::createNews')}}">Создать</a>--}}
+            <a class="btn btn-success" href="{{route('admin::createNews')}}">Создать новость</a>
+            <a class="btn btn-primary" href="{{ route('admin::createCategory') }}">Создать категорию новостей</a>
 
 
             <div class="list-group">

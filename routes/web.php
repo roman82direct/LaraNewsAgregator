@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+Route::get('/', '\App\Http\Controllers\NewsController@index');
 
 //Админка
 Route::group([
@@ -43,6 +44,12 @@ Route::group([
 //  Открытие формы и создание новостной категории
     Route::match(['GET', 'POST'], '/addcategory', 'NewsController@createCategory')
         ->name('createCategory');
+
+    Route::match(['post'], '/saveCategory', 'NewsController@saveCategory')
+        ->name('saveCategory');
+
+    Route::get('/updateCategory/{id}', 'NewsController@updateCategory')
+        ->name('updateCategory');
 });
 
 //    Route::get('/news', '\App\Http\Controllers\NewsController@index')
@@ -65,4 +72,5 @@ Route::group([
 });
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\NewsController::class, 'index'])->name('home');

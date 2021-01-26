@@ -30,4 +30,24 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'category_id',
+        'title',
+        'text',
+        'source_id',
+        'created_at',
+        'updated_at'
+    ];
+
+    public static function createRules()
+    {
+        return [
+            'title' => 'required|min:5|max:255',
+            'category' => 'required',
+            'category' => 'required',
+            'text' => 'required'
+        ];
+    }
 }
