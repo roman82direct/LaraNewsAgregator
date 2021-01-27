@@ -37,6 +37,7 @@ class News extends Model
         'title',
         'text',
         'source_id',
+        'img_source',
         'created_at',
         'updated_at'
     ];
@@ -45,7 +46,6 @@ class News extends Model
     {
         return [
             'title' => 'required|min:5|max:255',
-            'category' => 'required',
             'category' => 'required',
             'text' => 'required'
         ];

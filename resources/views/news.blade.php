@@ -18,7 +18,7 @@
             </nav>
             <ul class="categoryNews">
                 @foreach($news as $item)
-                    <li><a href="http://laranewsagregator/news/news_{{$item->id}}">{{$item->title}}</a></li>
+                    <li><a href="{{ route('news::newsId', ['id'=>$item->id]) }}">{{$item->title}}</a></li>
                 @endforeach
             </ul>
         </div>

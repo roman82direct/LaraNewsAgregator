@@ -68,7 +68,7 @@ Route::group([
     Route::get('/categories', 'NewsController@showCategories')
         ->name('categories');
     Route::get('/category_{id}', 'NewsController@showNewsByCategory');
-    Route::get('/news_{id}', 'NewsController@showNews');
+    Route::get('/news_{id}', 'NewsController@showNews')->name('newsId');
 });
 Auth::routes();
 
