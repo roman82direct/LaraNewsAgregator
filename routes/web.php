@@ -22,11 +22,29 @@ Route::get('/', '\App\Http\Controllers\NewsController@index');
 Route::group([
     'prefix' => '/admin',
     'as' => 'admin::',
-    'namespace' => '\App\Http\Controllers\Admin'
+    'namespace' => '\App\Http\Controllers\Admin',
+    'middleware' => ['auth', 'role:admin']
 ], function () {
-    Route::get('/', 'NewsController@index')
-        ->name('index');
 
+//USERS
+//    Route::resource('user', 'UserController');
+    Route::get('/users', 'UserController@index')
+        ->name('user');
+    Route::match(['get','post'], '/users/create', 'UserController@createUser')
+        ->name('createUser');
+
+    Route::match(['post'], '/users/save', 'UserController@saveUser')
+        ->name('saveUser');
+
+    Route::get('/users/update/{id}', 'UserController@updateUser')
+        ->name('updateUser');
+
+    Route::get('/users/delete/{id}', 'UserController@deleteUser')
+        ->name('deleteUser');
+
+//NEWS
+    Route::get('/news', 'NewsController@index')
+        ->name('news');
 //Страница результата добавления новости
     Route::match(['get','post'], '/create', 'NewsController@createNews')
         ->name('createNews');

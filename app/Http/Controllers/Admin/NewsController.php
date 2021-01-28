@@ -14,7 +14,7 @@ class NewsController extends Controller
         $news = News::query()
             ->orderBy('updated_at', 'desc')
             ->paginate(2);
-        return view('admin', ['news' => $news]);
+        return view('admin/news', ['news' => $news]);
     }
 
     public function createNews(){
@@ -51,7 +51,7 @@ class NewsController extends Controller
 
     public function deleteNews($id){
         News::destroy([$id]);
-        return redirect()->route("admin::index")
+        return redirect()->route("admin::news")
             ->with('success', "Данные удалены");
     }
 

@@ -37,6 +37,7 @@
             "dont-discover": []
         }
     },
+
     "autoload": {
         "psr-4": {
             "App\\": "app/",
@@ -44,6 +45,7 @@
             "Database\\Seeders\\": "database/seeders/"
         }
     },
+
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"

@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|News whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|News whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $img_source
+ * @method static \Illuminate\Database\Eloquent\Builder|News whereImgSource($value)
  */
 class News extends Model
 {

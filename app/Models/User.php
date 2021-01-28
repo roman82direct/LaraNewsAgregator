@@ -32,6 +32,8 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $role
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
  */
 class User extends Authenticatable
 {
@@ -66,4 +68,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function hasRole($role){
+        return $this->role == $role;
+    }
 }

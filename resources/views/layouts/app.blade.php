@@ -34,7 +34,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <a class="nav-link" href="{{ route('admin::index') }}">Admin</a>
+                        @auth()
+                            @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
+                                <a class="nav-link" href="{{ route('admin::news') }}">Admin</a>
+                            @endif
+                        @endauth
                         <a class="nav-link" href="{{ route('news::categories') }}">Категории новостей</a>
                         <a class="nav-link" href="{{ route('news::news') }}">Новости</a>
 {{--                        <a class="nav-link" href="{{ route('news') }}">Новости</a>--}}
@@ -71,6 +75,15 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    <hr>
+
+                                    @auth()
+                                        @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
+                                            <a class="nav-link" href="{{ route('admin::news') }}">Новости</a>
+                                            <a class="nav-link" href="{{ route('admin::user') }}">Пользователи</a>
+                                        @endif
+                                    @endauth
+
                                 </div>
                             </li>
                         @endguest

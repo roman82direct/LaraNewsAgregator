@@ -22,7 +22,12 @@
                 <H3>{{ $newsItem->title }}</H3>
                 <p>{{ $newsItem->text }}</p><hr>
                 <p>Источник: {{\App\Models\Source::find($newsItem->source_id)->title ?? 'Нет данных'}}</p>
-
+                @auth()
+                    @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
+                        <a style="margin-bottom: 10px" class="btn btn-primary" href="{{route('admin::updateNews', ['id' => $newsItem->id])}}">Изменить</a>
+                        <a style="margin-bottom: 10px" class="btn btn-danger" href="{{route('admin::deleteNews', ['id' => $newsItem->id])}}">Удалить</a>
+                    @endif
+                @endauth
             </div>
 
 {{--    <a class="btn btn-primary" href="/public/admin/addcategory">Добавить категорию новостей</a>--}}
