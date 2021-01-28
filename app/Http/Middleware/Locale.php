@@ -4,9 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 
-class CheckRole
+class Locale
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,11 @@ class CheckRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next)
     {
-        if (!Auth::user()->hasRole($role)){
-            abort(403, 'У вас нет прав доступа');
-        };
+        if($request->session()->exists('locale')){
+            App::setLocale($request->session()->get('locale'));
+        }
         return $next($request);
     }
 }

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::get('/', '\App\Http\Controllers\NewsController@index');
+Route::get('/', '\App\Http\Controllers\NewsController@index')->name('main');
 
 //Админка
 Route::group([
@@ -70,11 +70,6 @@ Route::group([
         ->name('updateCategory');
 });
 
-//    Route::get('/news', '\App\Http\Controllers\NewsController@index')
-//        ->name('news');
-//
-//    Route::get('/categories', '\App\Http\Controllers\NewsController@showCategories')
-//        ->name('categories');
 
 Route::group([
     'prefix' => '/news',
@@ -88,7 +83,11 @@ Route::group([
     Route::get('/category_{id}', 'NewsController@showNewsByCategory');
     Route::get('/news_{id}', 'NewsController@showNews')->name('newsId');
 });
+
+Route::get('/locale/{lang}', [App\Http\Controllers\LocaleController::class, 'index'])
+    ->where('lang', '\w+')
+    ->name('locale');
+
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\NewsController::class, 'index'])->name('home');

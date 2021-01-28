@@ -45,7 +45,23 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
+
                     <ul class="navbar-nav ml-auto">
+                        <p>{{ \Illuminate\Support\Facades\Session::get('locale') }}</p>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ __('menu.lang') }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('locale',['lang' => 'ru']) }}">
+                                    ru
+                                </a>
+                                <a class="dropdown-item" href="{{ route('locale', ['lang' => 'en'])}}">
+                                    en
+                                </a>
+                            </div>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -75,10 +91,10 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                    <hr>
 
                                     @auth()
                                         @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
+                                            <hr>
                                             <a class="nav-link" href="{{ route('admin::news') }}">Новости</a>
                                             <a class="nav-link" href="{{ route('admin::user') }}">Пользователи</a>
                                         @endif
