@@ -47,7 +47,7 @@
                     <!-- Right Side Of Navbar -->
 
                     <ul class="navbar-nav ml-auto">
-                        <p>{{ \Illuminate\Support\Facades\Session::get('locale') }}</p>
+                        <p>{{ \Illuminate\Support\Facades\App::getLocale() }}</p>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ __('menu.lang') }}
