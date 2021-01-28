@@ -29,8 +29,6 @@
                     @endif
                 @endauth
             </div>
-
-{{--    <a class="btn btn-primary" href="/public/admin/addcategory">Добавить категорию новостей</a>--}}
         </div>
     </div>
 @endsection
