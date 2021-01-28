@@ -41,7 +41,6 @@
                         @endauth
                         <a class="nav-link" href="{{ route('news::categories') }}">Категории новостей</a>
                         <a class="nav-link" href="{{ route('news::news') }}">Новости</a>
-{{--                        <a class="nav-link" href="{{ route('news') }}">Новости</a>--}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
