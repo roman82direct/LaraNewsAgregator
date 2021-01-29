@@ -16,10 +16,9 @@
                     <div class="list-group-item">
                         <div class="row justify-content-between">
                             <div>
-                                <h2>Имя: {{$item->name}}</h2>
+                                <h2>{{$item->name}}</h2>
                                 <p>Роль: {{$item->role}}</p>
                                 <p>email: {{$item->email}}</p>
-                                <p>email: {{$item->password}}</p>
                                 <p>Дата регистрации: {{$item->created_at ?? ''}}</p>
                             </div>
                         </div>
