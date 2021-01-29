@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://use.fontawesome.com/06c02d4b68.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -34,13 +35,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+
                         @auth()
                             @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
-                                <a class="nav-link" href="{{ route('admin::news') }}">Admin</a>
+                                <a class="nav-link" href="{{ route('admin::news') }}">{{ __('menu.admin') }}</a>
                             @endif
                         @endauth
-                        <a class="nav-link" href="{{ route('news::categories') }}">Категории новостей</a>
-                        <a class="nav-link" href="{{ route('news::news') }}">Новости</a>
+                        <a class="nav-link" href="{{ route('news::categories') }}">{{ __('menu.categories') }}</a>
+                        <a class="nav-link" href="{{ route('news::news') }}">{{ __('menu.news') }}</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -65,13 +67,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('menu.login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('menu.register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -84,7 +86,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('menu.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -94,8 +96,8 @@
                                     @auth()
                                         @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
                                             <hr>
-                                            <a class="nav-link" href="{{ route('admin::news') }}">Новости</a>
-                                            <a class="nav-link" href="{{ route('admin::user') }}">Пользователи</a>
+                                            <a class="nav-link" href="{{ route('admin::news') }}">{{ __('menu.news') }}</a>
+                                            <a class="nav-link" href="{{ route('admin::user') }}">{{ __('menu.users') }}</a>
                                         @endif
                                     @endauth
 

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ParseController;
+use \App\Http\Controllers\SocialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +70,10 @@ Route::group([
 
     Route::get('/updateCategory/{id}', 'NewsController@updateCategory')
         ->name('updateCategory');
+
+//    Parser
+    Route::get('parser', [ParseController::class, 'index'])
+        ->name('parser');
 });
 
 
@@ -87,6 +93,16 @@ Route::group([
 Route::get('/locale/{lang}', [App\Http\Controllers\LocaleController::class, 'index'])
     ->where('lang', '\w+')
     ->name('locale');
+
+Route::group([
+    'prefix' => 'social',
+    'as' => 'social::',
+], function () {
+    Route::get('/login', [SocialController::class, 'loginVk'])
+        ->name('login-vk');
+    Route::get('/response', [SocialController::class, 'responseVk'])
+        ->name('response-vk');
+});
 
 Auth::routes();
 

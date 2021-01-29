@@ -20,6 +20,7 @@
                                 <p>Роль: {{$item->role}}</p>
                                 <p>email: {{$item->email}}</p>
                                 <p>Дата регистрации: {{$item->created_at ?? ''}}</p>
+                                <img src="{{$item->avatar }}" alt="">
                             </div>
                         </div>
                         <a style="margin-bottom: 10px" class="btn btn-primary" href="{{route('admin::updateUser', ['id' => $item->id])}}">Изменить</a>
