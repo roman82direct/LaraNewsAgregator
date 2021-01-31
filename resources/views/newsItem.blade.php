@@ -17,20 +17,17 @@
                     @endif
                 </ol>
             </nav>
-
-            <div class="col-md-8">
-                <div class="row justify-content-between">
-                    <div>
-                        <h2>{{$newsItem->title}}</h2>
-                        <p>{{$newsItem->text}}</p>
-                        <p>Категория новостей: {{\App\Models\NewsCategories::find($newsItem->category_id)->title}}</p>
-                        <p>Источник: {{\App\Models\Source::find($newsItem->source_id)->title ?? 'Нет данных'}}</p>
-                    </div>
-                    <img style="height: 100px" src="{{ $newsItem->img_source }}" alt="">
-                </div>
+            <div class="col-md-4">
+                <H3>{{ $newsItem->title }}</H3>
+                <p>{{ $newsItem->text }}</p><hr>
+                <p>Источник: {{\App\Models\Source::find($newsItem->source_id)->title ?? 'Нет данных'}}</p>
+                @auth()
+                    @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
+                        <a style="margin-bottom: 10px" class="btn btn-primary" href="{{route('admin::updateNews', ['id' => $newsItem->id])}}">Изменить</a>
+                        <a style="margin-bottom: 10px" class="btn btn-danger" href="{{route('admin::deleteNews', ['id' => $newsItem->id])}}">Удалить</a>
+                    @endif
+                @endauth
             </div>
-
-{{--    <a class="btn btn-primary" href="/public/admin/addcategory">Добавить категорию новостей</a>--}}
         </div>
     </div>
 @endsection

@@ -10,14 +10,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h1>Новости</h1>
-
-            <a class="btn btn-success" href="{{route('admin::createNews')}}">Создать новость</a>
-            <a class="btn btn-primary" href="{{ route('admin::createCategory') }}">Создать категорию новостей</a>
-
+            <a style="margin-bottom: 10px" class="btn btn-success" href="{{route('admin::createNews')}}">Создать новость</a>
+            <a style="margin-bottom: 10px" class="btn btn-primary" href="{{ route('admin::createCategory') }}">Создать категорию новостей</a>
 
             <div class="list-group">
                 @forelse ($news as $item)
-
                     <div class="list-group-item">
                         <div class="row justify-content-between">
                             <div>

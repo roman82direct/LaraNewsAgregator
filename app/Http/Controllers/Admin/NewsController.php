@@ -7,14 +7,15 @@ use App\Models\News;
 use App\Models\NewsCategories;
 use App\Models\Source;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class NewsController extends Controller
 {
     public function index(){
         $news = News::query()
             ->orderBy('updated_at', 'desc')
-            ->paginate(5);
-        return view('admin', ['news' => $news]);
+            ->paginate(2);
+        return view('admin/news', ['news' => $news]);
     }
 
     public function createNews(){
@@ -51,7 +52,7 @@ class NewsController extends Controller
 
     public function deleteNews($id){
         News::destroy([$id]);
-        return redirect()->route("admin::index")
+        return redirect()->route("admin::news")
             ->with('success', "Данные удалены");
     }
 

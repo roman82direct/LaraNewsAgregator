@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://use.fontawesome.com/06c02d4b68.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -18,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -33,25 +35,45 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <a class="nav-link" href="{{ route('admin::index') }}">Admin</a>
-                        <a class="nav-link" href="{{ route('news::categories') }}">Категории новостей</a>
-                        <a class="nav-link" href="{{ route('news::news') }}">Новости</a>
-{{--                        <a class="nav-link" href="{{ route('news') }}">Новости</a>--}}
+
+                        @auth()
+                            @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
+                                <a class="nav-link" href="{{ route('admin::news') }}">{{ __('menu.admin') }}</a>
+                            @endif
+                        @endauth
+                        <a class="nav-link" href="{{ route('news::categories') }}">{{ __('menu.categories') }}</a>
+                        <a class="nav-link" href="{{ route('news::news') }}">{{ __('menu.news') }}</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
+
                     <ul class="navbar-nav ml-auto">
+                        <p>{{ \Illuminate\Support\Facades\App::getLocale() }}</p>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ __('menu.lang') }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('locale',['lang' => 'ru']) }}">
+                                    ru
+                                </a>
+                                <a class="dropdown-item" href="{{ route('locale', ['lang' => 'en'])}}">
+                                    en
+                                </a>
+                            </div>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('menu.login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('menu.register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -64,12 +86,21 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('menu.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
+                                    @auth()
+                                        @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
+                                            <hr>
+                                            <a class="nav-link" href="{{ route('admin::news') }}">{{ __('menu.news') }}</a>
+                                            <a class="nav-link" href="{{ route('admin::user') }}">{{ __('menu.users') }}</a>
+                                        @endif
+                                    @endauth
+
                                 </div>
                             </li>
                         @endguest

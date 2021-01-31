@@ -5,7 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">{{ __('Login') }}
+                    <div>
+                        <a href="{{ route('social::login-vk') }}"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                        <a href="{{ route('social::login-vk') }}"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                        <a href="{{ route('social::login-vk') }}"><i class="fa fa-google" aria-hidden="true"></i></a>
+
+                    </div>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

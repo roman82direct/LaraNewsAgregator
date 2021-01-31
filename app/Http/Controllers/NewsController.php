@@ -17,7 +17,7 @@ class NewsController extends Controller
     {
         $news = News::query()
             ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
         return view('news', ['news' => $news, 'id'=>0]);
     }
 
