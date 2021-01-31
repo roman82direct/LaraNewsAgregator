@@ -23,6 +23,7 @@ class SocialController extends Controller
             Socialite::driver('vkontakte')->user(),
             'vk'
         );
+//        dd(password_verify('11111111',$ownUser->password));
         \Auth::login($ownUser);
         return redirect()->route('main');
     }

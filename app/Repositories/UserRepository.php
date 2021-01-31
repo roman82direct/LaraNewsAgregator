@@ -21,7 +21,7 @@ class UserRepository
             $ownUser->fill([
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
-                'password' => md5('11111111'),
+                'password' => \Hash::make('11111111'),
                 'id_in_soc' => $user->getId(),
                 'type_auth' => $socName,
                 'avatar' => $user->getAvatar()

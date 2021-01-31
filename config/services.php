@@ -36,4 +36,10 @@ return [
         'redirect' => env('VK_REDIRECT_URI')
     ],
 
+    'google' => [
+        'client_id' => 'app id',
+        'client_secret' => 'add secret',
+        'redirect' => 'http://learnl52.hd/auth/google/callback',
+    ],
+
 ];
