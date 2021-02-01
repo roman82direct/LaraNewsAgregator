@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Session;
 class NewsController extends Controller
 {
     public function index(){
+//        foreach (NewsCategories::all() as $item){
+//            dump($item->title, News::where('category_id', $item->id)->count());
+//        }
         $news = News::query()
             ->orderBy('updated_at', 'desc')
             ->paginate(2);

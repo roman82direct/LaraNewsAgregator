@@ -21,7 +21,6 @@ class NewsParser {
         } catch (\Exception $e) {
             dd($source);
         }
-//        dump($data);
             return $data;
     }
 }

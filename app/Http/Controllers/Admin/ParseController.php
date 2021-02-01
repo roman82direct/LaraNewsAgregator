@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\NewsParsingJob;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParseController extends Controller
@@ -31,8 +32,8 @@ class ParseController extends Controller
 
     public function loadYandexNews(){
         foreach ($this->sourcesYandex as $source){
-            NewsParsingJob::dispatch($source);
-        }
-        return redirect()->back()->with('success', "Новости загружены");
+                NewsParsingJob::dispatch($source);
+            }
+        return redirect()->route('admin::news')->with('success', "Новости загружены");
     }
 }

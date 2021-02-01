@@ -46,7 +46,6 @@ class NewsParsingJob implements ShouldQueue
         ])->save();
         foreach ($news['items'] as $item){
             $newsId =News::whereTitle($item['title'])->value('id');
-//            dd($newsId);
             if (is_null($newsId)){
                 News::insert(['category_id' => $category->id,
                     'title' => $item['title'],
@@ -55,4 +54,5 @@ class NewsParsingJob implements ShouldQueue
             }
         }
     }
+
 }
