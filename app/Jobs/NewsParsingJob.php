@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Mockery\Exception;
 
 class NewsParsingJob implements ShouldQueue
 {
@@ -36,7 +37,15 @@ class NewsParsingJob implements ShouldQueue
      */
     public function handle(NewsParser $parser)
     {
-        $news = $parser->parse($this->source);
+        \Storage::disk('parser_logs')->append('parser.log', date("H:i:s "). $this->source);
+        $message = 'success';
+        try {
+            $news = $parser->parse($this->source);
+        } catch (\Exception $exception){
+            $message = "error: " .$exception->getMessage();
+        } finally {
+            \Storage::disk('parser_logs')->append('parser.log', $message);
+        }
 
         $exist = NewsCategories::whereTitle($news['channel_title'])->value('id');
         $category = !is_null($exist) ? NewsCategories::find($exist) : new NewsCategories();
@@ -47,9 +56,11 @@ class NewsParsingJob implements ShouldQueue
         foreach ($news['items'] as $item){
             $newsId =News::whereTitle($item['title'])->value('id');
             if (is_null($newsId)){
-                News::insert(['category_id' => $category->id,
+                News::query()->fill([
+                    'category_id' => $category->id,
                     'title' => $item['title'],
                     'text' => $item['description'],
+                    'build' => 'loaded',
                     'source_id' => 1]);
             }
         }

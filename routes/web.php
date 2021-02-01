@@ -91,6 +91,7 @@ Route::group([
         ->name('categories');
     Route::get('/category_{id}', 'NewsController@showNewsByCategory');
     Route::get('/news_{id}', 'NewsController@showNews')->name('newsId');
+//    Route::match(['GET', 'POST'], '/upload', 'NewsController@upload')->name('upload');
 });
 
 Route::get('/locale/{lang}', [App\Http\Controllers\LocaleController::class, 'index'])

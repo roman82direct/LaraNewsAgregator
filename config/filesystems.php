@@ -35,6 +35,17 @@ return [
             'root' => storage_path('app'),
         ],
 
+        //настройка лога парсера
+        'parser_logs' => [
+            'driver' => 'local',
+            'root' => storage_path('app/logs'),
+        ],
+
+        'uploads' => [
+            'driver' => 'local',
+            'root' => storage_path('uploads/img'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

@@ -28,7 +28,7 @@
             @endif
             <h1>Новость</h1>
 
-            <form class="" action="{{route('admin::saveNews')}}" method="POST">
+            <form class="" action="{{route('admin::saveNews')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                     <input type="hidden" name="id" value="{{$model->id ?? ''}}">
                 <div class="form-group">
@@ -57,6 +57,10 @@
                 <div class="form-group">
                     <label for="title">Источник новости</label>
                     <input type="text" class="form-control" name="source" value="{{\App\Models\Source::find($model->source_id)->title ?? ''}}" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="file">Загрузите файл</label>
+                    <input type="file" name="file" class="form-control-file" id="file" accept="image/jpeg, image/png">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Опубликовать</button>

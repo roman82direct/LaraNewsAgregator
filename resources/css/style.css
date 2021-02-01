@@ -10,3 +10,11 @@ svg{
     justify-content: center!important;
     align-items: center!important;
 }
+.newsItem{
+    width: 100%;
+}
+.itemImg{
+    margin-left: 20px!important;
+    width: 200px!important;
+
+}

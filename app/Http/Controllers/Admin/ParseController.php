@@ -34,6 +34,6 @@ class ParseController extends Controller
         foreach ($this->sourcesYandex as $source){
                 NewsParsingJob::dispatch($source);
             }
-        return redirect()->route('admin::news')->with('success', "Новости загружены");
+        return redirect()->back()->with('success', "Новости загружены");
     }
 }

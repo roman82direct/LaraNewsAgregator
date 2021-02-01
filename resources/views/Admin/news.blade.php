@@ -17,15 +17,18 @@
 
             <div class="list-group">
                 @forelse ($news as $item)
-                    <div class="list-group-item">
-                        <div class="row justify-content-between">
+                    <div class="col-md-12 list-group-item">
+                        <div class="d-flex justify-content-between newsItem">
                             <div>
                                 <h2>{{$item->title}}</h2>
                                 <p>{{$item->text}}</p>
                                 <p>Категория новостей: {{\App\Models\NewsCategories::find($item->category_id)->title}}</p>
                                 <p>Источник: {{\App\Models\Source::find($item->source_id)->title ?? ''}}</p>
+                                <p>Происхождение: {{ $item->build }}</p>
                             </div>
-                            <img style="height: 100px" src="{{ $item->img_source }}" alt="">
+                            <div>
+                                <img class="itemImg" src="{{ $item->img_source }}" alt="">
+                            </div>
                         </div>
                         <a style="margin-bottom: 10px" class="btn btn-primary" href="{{route('admin::updateNews', ['id' => $item->id])}}">Изменить</a>
                         <a style="margin-bottom: 10px" class="btn btn-danger" href="{{route('admin::deleteNews', ['id' => $item->id])}}">Удалить</a>

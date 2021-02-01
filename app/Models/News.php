@@ -41,7 +41,8 @@ class News extends Model
         'source_id',
         'img_source',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'build'
     ];
 
     public static function createRules()

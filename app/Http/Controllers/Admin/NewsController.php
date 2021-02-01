@@ -8,6 +8,7 @@ use App\Models\NewsCategories;
 use App\Models\Source;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use PHPUnit\Exception;
 
 class NewsController extends Controller
 {
@@ -31,17 +32,34 @@ class NewsController extends Controller
 
     public function saveNews(Request $request)
     {
+//        dd($request->file('file')->getFileInfo());
+
         $this->validate($request, News::createRules());
         $id = $request->post('id');
         $model = $id ? News::find($id) : new News();
+
+//        $path = storage_path('uploads')."".$_FILES['file']['name'];
+//        dd($path);
+//        if(move_uploaded_file($_FILES['file']['tmp_name'],$path)){
+//
+//        }
+
         $model->fill([
             "title" => $request->post('title'),
             "category_id" => NewsCategories::whereTitle($request->post('category'))->value('id'),
             "text" => $request->post('text'),
-            "source_id" => Source::whereTitle($request->post('source'))->value('id')
+            "source_id" => Source::whereTitle($request->post('source'))->value('id'),
+//            "img_source" => storage_path('app/uploads/').$_FILES['file']['name'],
+            "build" => "by_admin"
         ])->save();
+            if (is_file($request->file('file'))){
+                $request->file('file')->store('uploads');
+                $message = 'Данные сохранены';
+            } else
+                $message = 'Данные сохранены. Файл не выбран!';
+
         return redirect()->route("admin::updateNews", ['id' => $model->id])
-            ->with('success', "Данные сохранены");
+            ->with('success', $message);
     }
 
     public function updateNews($id)

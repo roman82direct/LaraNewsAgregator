@@ -17,10 +17,17 @@
                     @endif
                 </ol>
             </nav>
-            <div class="col-md-4">
-                <H3>{{ $newsItem->title }}</H3>
-                <p>{{ $newsItem->text }}</p><hr>
-                <p>Источник: {{\App\Models\Source::find($newsItem->source_id)->title ?? 'Нет данных'}}</p>
+            <div class="col-md-12">
+                <div class="d-flex justify-content-between newsItem">
+                    <div>
+                        <H3>{{ $newsItem->title }}</H3>
+                        <p>{{ $newsItem->text }}</p><hr>
+                        <p>Источник: {{\App\Models\Source::find($newsItem->source_id)->title ?? 'Нет данных'}}</p>
+                    </div>
+                    <div>
+                        <img class="itemImg" src="{{ $newsItem->img_source }}" alt="">
+                    </div>
+                </div>
                 @auth()
                     @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
                         <a style="margin-bottom: 10px" class="btn btn-primary" href="{{route('admin::updateNews', ['id' => $newsItem->id])}}">Изменить</a>
