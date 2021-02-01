@@ -56,6 +56,13 @@ class NewsController extends Controller
             ->with('success', "Данные удалены");
     }
 
+    public function deleteAllNews(){
+        News::select()->delete();
+        NewsCategories::select()->delete();
+        return redirect()->back()
+            ->with('success', "Данные удалены");
+    }
+
     public function createCategory(){
         return view("admin/adminaddCategory", [
             'model' => new NewsCategories(),
@@ -65,6 +72,7 @@ class NewsController extends Controller
     }
 
     public function saveCategory(Request $request){
+//        dd($request->has('check')); //проверка чекбокса на checked
         $id = $request->post('id');
         $model = $id ? NewsCategories::find($id) : new NewsCategories();
         $model->fill([

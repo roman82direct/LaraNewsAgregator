@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('news::categories')}}">Все категории</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('news::categories')}}">Все категории: </a></li>
                     @if($id)
                         <li class="breadcrumb-item">
                             <a href="category_{{ $id ?? ''}}">{{\App\Models\NewsCategories::find($id)->title}}</a>

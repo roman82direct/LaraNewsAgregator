@@ -12,6 +12,8 @@
             <h1>Новости</h1>
             <a style="margin-bottom: 10px" class="btn btn-success" href="{{route('admin::createNews')}}">Создать новость</a>
             <a style="margin-bottom: 10px" class="btn btn-primary" href="{{ route('admin::createCategory') }}">Создать категорию новостей</a>
+            <a style="margin-bottom: 10px" class="btn btn-success" href="{{ route('admin::deleteAllNews') }}">Удалить все новости</a>
+            <a style="margin-bottom: 10px" class="btn btn-primary" href="{{ route('admin::loadYandexNews') }}">Загрузить с Yandex</a>
 
             <div class="list-group">
                 @forelse ($news as $item)

@@ -28,6 +28,10 @@
                     <label for="discr">Описание категории</label>
                     <input type="text" class="form-control" name="discr" value="{{$model->description ?? old('discr')}}">
                 </div>
+                <div class="form-group">
+                    <label for="check">12+ content</label>
+                    <input type="checkbox" name="check" value="Check">
+                </div>
                 <button type="submit" class="btn btn-primary">Добавить</button>
             </form>
         </div>

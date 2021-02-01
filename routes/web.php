@@ -61,6 +61,9 @@ Route::group([
     Route::get('/delete/{id}', 'NewsController@deleteNews')
         ->name('deleteNews');
 
+    Route::get('/delete', 'NewsController@deleteAllNews')
+        ->name('deleteAllNews');
+
 //  Открытие формы и создание новостной категории
     Route::match(['GET', 'POST'], '/addcategory', 'NewsController@createCategory')
         ->name('createCategory');
@@ -72,8 +75,8 @@ Route::group([
         ->name('updateCategory');
 
 //    Parser
-    Route::get('parser', [ParseController::class, 'index'])
-        ->name('parser');
+    Route::get('/loadnews', 'ParseController@loadYandexNews')
+        ->name('loadYandexNews');
 });
 
 

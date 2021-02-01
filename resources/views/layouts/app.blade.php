@@ -41,8 +41,8 @@
                                 <a class="nav-link" href="{{ route('admin::news') }}">{{ __('menu.admin') }}</a>
                             @endif
                         @endauth
-                        <a class="nav-link" href="{{ route('news::categories') }}">{{ __('menu.categories') }}</a>
-                        <a class="nav-link" href="{{ route('news::news') }}">{{ __('menu.news') }}</a>
+                        <a class="nav-link" href="{{ route('news::categories') }}">{{ __('menu.categories') }} ({{ \App\Models\NewsCategories::count() }})</a>
+                        <a class="nav-link" href="{{ route('news::news') }}">{{ __('menu.news') }} ({{ \App\Models\News::count() }})</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

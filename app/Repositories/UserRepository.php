@@ -21,6 +21,9 @@ class UserRepository
             $ownUser->fill([
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
+                /**
+                 * TODO реализовать отправку случайного пароля по почте
+                 */
                 'password' => \Hash::make('11111111'),
                 'id_in_soc' => $user->getId(),
                 'type_auth' => $socName,

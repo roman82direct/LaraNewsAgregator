@@ -52,4 +52,9 @@ class News extends Model
             'text' => 'required'
         ];
     }
+
+    public function deleteAllNews()
+    {
+
+    }
 }

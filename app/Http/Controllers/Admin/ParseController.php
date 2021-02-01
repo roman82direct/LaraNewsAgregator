@@ -3,24 +3,36 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\NewsParsingJob;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParseController extends Controller
 {
-    public function index(){
-        $xml = XmlParser::load('https://3dnews.ru/news/rss/');
-        $data = $xml->parse([
-            'channel_title' => ['uses' => 'channel.title'],
-            'channel_description' => ['uses' => 'channel.description'],
-            'items' => ['uses' => 'channel.item[title,description,pubDate,category]'],
-        ]);
-        dump($data);
-//        foreach ($data['items'] as $item){
-//            News::insert(['category_id' => 8, 'title' => $item['title'], 'text' => $item['description']]);
-//        }
+    public $sourcesYandex = [
+        'https://news.yandex.ru/auto.rss',
+        'https://news.yandex.ru/auto_racing.rss',
+        'https://news.yandex.ru/gadgets.rss',
+        'https://news.yandex.ru/index.rss',
+//        'https://news.yandex.ru/martial_arts.rss',
+//        'https://news.yandex.ru/communal.rss',
+//        'https://news.yandex.ru/health.rss',
+//        'https://news.yandex.ru/games.rss',
+//        'https://news.yandex.ru/internet.rss',
+//        'https://news.yandex.ru/cyber_sport.rss',
+//        'https://news.yandex.ru/movies.rss',
+//        'https://news.yandex.ru/cosmos.rss',
+//        'https://news.yandex.ru/culture.rss',
+//        'https://news.yandex.ru/championsleague.rss',
+//        'https://news.yandex.ru/music.rss',
+//        'https://news.yandex.ru/nhl.rss',
+    ];
 
-        return redirect()->back();
+    public function loadYandexNews(){
+        foreach ($this->sourcesYandex as $source){
+            NewsParsingJob::dispatch($source);
+        }
+        return redirect()->back()->with('success', "Новости загружены");
     }
 }

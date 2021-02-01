@@ -25,6 +25,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function createUser()
+        /**
+         * TODO реализовать добавление пользователя
+         */
     {
         dd('Create User Form');
     }
@@ -70,6 +73,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function updateUser(Request $request, $id)
+        /**
+         * TODO реализовать редактирования профиля
+         */
     {
         dd('Update User Form');
     }

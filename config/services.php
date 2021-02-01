@@ -35,7 +35,9 @@ return [
         'client_secret' => env('VK_SECRET'),
         'redirect' => env('VK_REDIRECT_URI')
     ],
-
+    /**
+     * TODO доделать auth через Google
+     */
     'google' => [
         'client_id' => 'app id',
         'client_secret' => 'add secret',
