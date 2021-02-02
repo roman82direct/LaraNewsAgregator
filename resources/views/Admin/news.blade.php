@@ -28,7 +28,7 @@
                                 <p>Происхождение: {{ $item->build }}</p>
                             </div>
                             <div>
-                                <img id="img" class="itemImg" src="{{ $item->img_source }}" alt="">
+                                <img id="img" class="itemBigImg" src="{{ $item->img_source }}" alt="">
                             </div>
                         </div>
                         <a style="margin-bottom: 10px" class="btn btn-primary" href="{{route('admin::updateNews', ['id' => $item->id])}}">Изменить</a>

@@ -43,7 +43,7 @@ class NewsController extends Controller
             $url = \Storage::url($_FILES['file']['name']);
             $message = 'Данные сохранены';
         } else {
-            $url = 'https://place-hold.it/100';
+            $url = $id ? News::find($id)->img_source : 'https://place-hold.it/100';
             $message = 'Данные сохранены. Файл не выбран!';
         }
 

@@ -59,9 +59,11 @@
                     <input type="text" class="form-control" name="source" value="{{\App\Models\Source::find($model->source_id)->title ?? ''}}" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label for="file">Загрузите файл</label>
+                    <label for="file">
+                        Загружен файл: <a href="{{$model->img_source}}" target="_blank"><img class="smallImg" style="width: 30px" src="{{$model->img_source}}" alt=""></a>
+                    </label>
                     <input type="file" name="file" class="form-control-file" id="file" accept="image/jpeg, image/png">
-                </div>
+                 </div>
 
                 <button type="submit" class="btn btn-primary">Опубликовать</button>
             </form>
