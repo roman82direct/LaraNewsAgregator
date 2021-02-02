@@ -41,27 +41,29 @@ class NewsParsingJob implements ShouldQueue
         $message = 'success';
         try {
             $news = $parser->parse($this->source);
-        } catch (\Exception $exception){
+            } catch (\Exception $exception){
             $message = "error: " .$exception->getMessage();
         } finally {
             \Storage::disk('parser_logs')->append('parser.log', $message);
         }
-
-        $exist = NewsCategories::whereTitle($news['channel_title'])->value('id');
-        $category = !is_null($exist) ? NewsCategories::find($exist) : new NewsCategories();
+        $existCat = NewsCategories::whereTitle($news['channel_title'])->value('id');
+        $category = !is_null($existCat) ? NewsCategories::find($existCat) : new NewsCategories();
         $category->fill([
             "title" => $news['channel_title'],
             "description" => $news['channel_description']
         ])->save();
+
         foreach ($news['items'] as $item){
             $newsId =News::whereTitle($item['title'])->value('id');
             if (is_null($newsId)){
-                News::query()->fill([
+                News::insert([
                     'category_id' => $category->id,
                     'title' => $item['title'],
                     'text' => $item['description'],
                     'build' => 'loaded',
-                    'source_id' => 1]);
+                    'img_source' => 'https://place-hold.it/100',
+                    'source_id' => 1
+                ]);
             }
         }
     }

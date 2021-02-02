@@ -38,28 +38,25 @@ class NewsController extends Controller
         $id = $request->post('id');
         $model = $id ? News::find($id) : new News();
 
-//        $path = storage_path('uploads')."".$_FILES['file']['name'];
-//        dd($path);
-//        if(move_uploaded_file($_FILES['file']['tmp_name'],$path)){
-//
-//        }
+        if (is_file($request->file('file'))){
+            $request->file('file')->storeAs('public', $_FILES['file']['name']);
+            $url = \Storage::url($_FILES['file']['name']);
+            $message = 'Данные сохранены';
+        } else {
+            $url = 'https://place-hold.it/100';
+            $message = 'Данные сохранены. Файл не выбран!';
+        }
 
         $model->fill([
             "title" => $request->post('title'),
             "category_id" => NewsCategories::whereTitle($request->post('category'))->value('id'),
             "text" => $request->post('text'),
             "source_id" => Source::whereTitle($request->post('source'))->value('id'),
-//            "img_source" => storage_path('app/uploads/').$_FILES['file']['name'],
+            "img_source" => $url,
             "build" => "by_admin"
         ])->save();
-            if (is_file($request->file('file'))){
-                $request->file('file')->store('uploads');
-                $message = 'Данные сохранены';
-            } else
-                $message = 'Данные сохранены. Файл не выбран!';
 
-        return redirect()->route("admin::updateNews", ['id' => $model->id])
-            ->with('success', $message);
+        return redirect()->route('admin::news')->with('success', $message);
     }
 
     public function updateNews($id)
