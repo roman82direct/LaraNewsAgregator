@@ -24,10 +24,11 @@
                                 <p>{{$item->text}}</p>
                                 <p>Категория новостей: {{\App\Models\NewsCategories::find($item->category_id)->title}}</p>
                                 <p>Источник: {{\App\Models\Source::find($item->source_id)->title ?? ''}}</p>
+                                <i>Дата публикации: {{$item->created_at ?? 'Нет данных'}}</i>
                                 <p>Происхождение: {{ $item->build }}</p>
                             </div>
                             <div>
-                                <img id="img" class="itemImg" src="{{ $item->img_source ?? old('img')}}" alt="">
+                                <img id="img" class="itemImg" src="{{ $item->img_source }}" alt="">
                             </div>
                         </div>
                         <a style="margin-bottom: 10px" class="btn btn-primary" href="{{route('admin::updateNews', ['id' => $item->id])}}">Изменить</a>

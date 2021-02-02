@@ -17,8 +17,8 @@ class NewsController extends Controller
     {
         $news = News::query()
             ->orderBy('updated_at', 'desc')
-            ->paginate(100);
-        return view('news', ['news' => $news, 'id'=>0]);
+            ->paginate(4);
+        return view('news', ['news' => $news, 'categories' => NewsCategories::all(), 'id' => 0]);
     }
 
     public function showCategories(){
@@ -27,10 +27,12 @@ class NewsController extends Controller
 //        dd($categories);
         return view('newsCategories', ['categories'=>$categories]);
     }
+
     public function showNewsByCategory($id){
         $news = News::whereCategoryId($id)
-        ->get();
-        return view('news', ['news' => $news, 'id'=>$id]);
+            ->orderBy('updated_at', 'desc')
+            ->paginate(4);
+        return view('newsByCategory', ['news' => $news, 'id' =>$id]);
     }
 
     public function showNews($id){

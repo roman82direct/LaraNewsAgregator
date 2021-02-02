@@ -40,8 +40,8 @@ class News extends Model
         'text',
         'source_id',
         'img_source',
-        'created_at',
-        'updated_at',
+//        'created_at',
+//        'updated_at',
         'build'
     ];
 

@@ -12,7 +12,8 @@
             </nav>
         <ul class="categoryNews">
             @foreach($categories as $item)
-                <li><a href="category_{{$item->id}}">{{$item->title}}</a></li>
+                <li><a href="{{ route('news::categoryId', ['id'=>$item->id]) }}">{{$item->title}}</a></li>
+{{--                <li><a href="category_{{$item->id}}">{{$item->title}}</a></li>--}}
             @endforeach
         </ul>
 {{--    <a class="btn btn-primary" href="/public/admin/addcategory">Добавить категорию новостей</a>--}}

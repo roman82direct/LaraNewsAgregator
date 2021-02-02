@@ -62,6 +62,7 @@ class NewsParsingJob implements ShouldQueue
                     'text' => $item['description'],
                     'build' => 'loaded',
                     'img_source' => 'https://place-hold.it/100',
+                    'created_at' => date("Y-m-d H:i:s"),
                     'source_id' => 1
                 ]);
             }

@@ -89,8 +89,10 @@ Route::group([
         ->name('news');
     Route::get('/categories', 'NewsController@showCategories')
         ->name('categories');
-    Route::get('/category_{id}', 'NewsController@showNewsByCategory');
-    Route::get('/news_{id}', 'NewsController@showNews')->name('newsId');
+    Route::get('/category_{id}', 'NewsController@showNewsByCategory')
+        ->name('categoryId');
+    Route::get('/news_{id}', 'NewsController@showNews')
+        ->name('newsId');
 //    Route::match(['GET', 'POST'], '/upload', 'NewsController@upload')->name('upload');
 });
 
