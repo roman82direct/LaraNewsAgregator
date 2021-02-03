@@ -7,8 +7,10 @@
             <div class="card">
                 <div class="card-header">{{ __('Login') }}
                     <div>
-                        <a href="{{ route('social::login-vk') }}"><i class="fa fa-vk" aria-hidden="true"></i></a>
-                        <p><a href="{{ route('github::login-github') }}">Github</a></p>
+
+                        <a href="{{ route('social::login', 'vkontakte') }}"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                        <a href="{{ route('social::login', ['provider'=>'github']) }}"><i class="fa fa-github" aria-hidden="true"></i></a>
+{{--                        <a href="{{ route('github::login-github') }}"><i class="fa fa-github" aria-hidden="true"></i></a>--}}
                     </div>
                 </div>
 

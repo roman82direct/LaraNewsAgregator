@@ -12,36 +12,17 @@ use Laravel\Socialite\SocialiteManager;
 
 class SocialController extends Controller
 {
-    public function loginVk(){
+    public function login($provider){
         if(\Auth::id()){
             return redirect()->back();
         }
-        return Socialite::with('vkontakte')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
-    public function responseVk(UserRepository $repository){
+    public function response(UserRepository $repository, $provider){
         $ownUser = $repository->getBySocialId(
-            Socialite::driver('vkontakte')->user(),
-            'vk'
-        );
-//        dd(password_verify('11111111',$ownUser->password));
-        \Auth::login($ownUser);
-        return redirect()->route('main');
-    }
-
-    public function loginGH(){
-
-        if(\Auth::id()){
-            return redirect()->back();
-        }
-        return Socialite::with('github')->redirect();
-    }
-
-    public function responseGH(UserRepository $repository){
-        $ownUser = $repository->getBySocialId(
-            Socialite::driver('github')->user(),
-            'gh'
-        );
+            Socialite::driver($provider)->user(),
+            $provider);
 //        dd(password_verify('11111111',$ownUser->password));
         \Auth::login($ownUser);
         return redirect()->route('main');

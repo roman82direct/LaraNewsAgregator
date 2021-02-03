@@ -101,23 +101,23 @@ Route::get('/locale/{lang}', [App\Http\Controllers\LocaleController::class, 'ind
     ->name('locale');
 
 Route::group([
-    'prefix' => 'social',
+    'prefix' => '/social',
     'as' => 'social::',
 ], function () {
-    Route::get('/login', [SocialController::class, 'loginVk'])
-        ->name('login-vk');
-    Route::get('/response', [SocialController::class, 'responseVk'])
-        ->name('response-vk');
+    Route::get('/{provider}', [SocialController::class, 'login'])
+        ->name('login');
+    Route::get('/{provider}/response', [SocialController::class, 'response'])
+        ->name('response');
 });
-Route::group([
-    'prefix' => 'social/github',
-    'as' => 'github::',
-], function (){
-    Route::get('/login', [SocialController::class, 'loginGH'])
-        ->name('login-github');
-    Route::get('/response', [SocialController::class, 'responseGH'])
-        ->name('response-github');
-});
+//Route::group([
+//    'prefix' => 'social/github',
+//    'as' => 'github::',
+//], function (){
+//    Route::get('/login', [SocialController::class, 'loginGH'])
+//        ->name('login-github');
+//    Route::get('/response', [SocialController::class, 'responseGH'])
+//        ->name('response-github');
+//});
 
 
 Auth::routes();
