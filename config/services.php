@@ -35,6 +35,12 @@ return [
         'client_secret' => env('VK_SECRET'),
         'redirect' => env('VK_REDIRECT_URI')
     ],
+
+    'github' => [
+        'client_id' => env('GH_KEY'),
+        'client_secret' => env('GH_SECRET'),
+        'redirect' => env('GH_REDIRECT_URI')
+    ],
     /**
      * TODO доделать auth через Google
      */

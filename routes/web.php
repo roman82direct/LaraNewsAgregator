@@ -109,6 +109,16 @@ Route::group([
     Route::get('/response', [SocialController::class, 'responseVk'])
         ->name('response-vk');
 });
+Route::group([
+    'prefix' => 'social/github',
+    'as' => 'github::',
+], function (){
+    Route::get('/login', [SocialController::class, 'loginGH'])
+        ->name('login-github');
+    Route::get('/response', [SocialController::class, 'responseGH'])
+        ->name('response-github');
+});
+
 
 Auth::routes();
 

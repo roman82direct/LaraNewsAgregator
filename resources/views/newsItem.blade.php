@@ -28,6 +28,7 @@
                         <img class="itemImg" src="{{ $newsItem->img_source }}" alt="">
                     </div>
                 </div>
+
                 @auth()
                     @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
                         <a style="margin-bottom: 10px" class="btn btn-primary" href="{{route('admin::updateNews', ['id' => $newsItem->id])}}">Изменить</a>
