@@ -29,7 +29,9 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
+    /**
+     * Настройка провайдеров аутентификации через соцсети
+     */
     'vkontakte' => [
         'client_id' => env('VK_KEY'),
         'client_secret' => env('VK_SECRET'),
@@ -41,13 +43,11 @@ return [
         'client_secret' => env('GH_SECRET'),
         'redirect' => env('GH_REDIRECT_URI')
     ],
-    /**
-     * TODO доделать auth через Google
-     */
-    'google' => [
-        'client_id' => 'app id',
-        'client_secret' => 'add secret',
-        'redirect' => 'http://learnl52.hd/auth/google/callback',
+
+    'facebook' => [
+        'client_id' => env('FB_KEY'),
+        'client_secret' => env('FB_SECRET'),
+        'redirect' => env('FB_REDIRECT_URI')
     ],
 
 ];

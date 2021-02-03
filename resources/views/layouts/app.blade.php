@@ -23,7 +23,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav style="height: 80px" class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/news') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -48,10 +48,9 @@
                     <!-- Right Side Of Navbar -->
 
                     <ul class="navbar-nav ml-auto">
-                        <p>{{ \Illuminate\Support\Facades\App::getLocale() }}</p>
-                        <li class="nav-item dropdown">
+                        <li style="display: flex; flex-direction: column; justify-content: center" class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ __('menu.lang') }}
+                                {{ __('menu.lang') .' :: '. App::getLocale() }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -77,9 +76,11 @@
                                 </li>
                             @endif
                         @else
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
+                                    <img style="width: 40px; border-radius: 15px" src="{{ Auth::user()->avatar }}" alt="">
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -96,8 +97,8 @@
                                     @auth()
                                         @if(\Illuminate\Support\Facades\Auth::user()->hasRole('admin'))
                                             <hr>
-                                            <a class="nav-link" href="{{ route('admin::news') }}">{{ __('menu.news') }}</a>
-                                            <a class="nav-link" href="{{ route('admin::user') }}">{{ __('menu.users') }}</a>
+                                            <a class="dropdown-item" href="{{ route('admin::news') }}">{{ __('menu.news') }}</a>
+                                            <a class="dropdown-item" href="{{ route('admin::user') }}">{{ __('menu.users') }}</a>
                                         @endif
                                     @endauth
 

@@ -7,6 +7,7 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use SocialiteProviders\Facebook\FacebookExtendSocialite;
 use SocialiteProviders\GitHub\GitHubExtendSocialite;
 use SocialiteProviders\Google\GoogleExtendSocialite;
 use SocialiteProviders\Manager\SocialiteWasCalled;
@@ -28,6 +29,7 @@ class EventServiceProvider extends ServiceProvider
             VKontakteExtendSocialite::class,
 //        'SocialiteProviders\\GitHub\\GitHubExtendSocialite@handle',
             GitHubExtendSocialite::class,
+            FacebookExtendSocialite::class,
             GoogleExtendSocialite::class,
         ],
 
