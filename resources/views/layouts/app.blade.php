@@ -6,6 +6,8 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+{{--    Google access --}}
+    <meta name="google-site-verification" content="-RQMcA0x6IpQbdiEat3uigKmvoJ-PY23XyytvWqE65c" />
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -20,6 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -50,7 +53,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li style="display: flex; flex-direction: column; justify-content: center" class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ __('menu.lang') .' :: '. App::getLocale() }}
+                                {{ __('menu.lang') .'  '. mb_strtoupper(App::getLocale()) }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

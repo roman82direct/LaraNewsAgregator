@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\NewsParsingJob;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Mockery\Exception;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ParseController;
 use \App\Http\Controllers\SocialController;
+use App\Http\Controllers\LocaleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,8 @@ use \App\Http\Controllers\SocialController;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::get('/', '\App\Http\Controllers\NewsController@index')->name('main');
+Route::get('/', '\App\Http\Controllers\NewsController@index')
+    ->name('main');
 
 //Админка
 Route::group([
@@ -96,7 +98,7 @@ Route::group([
 //    Route::match(['GET', 'POST'], '/upload', 'NewsController@upload')->name('upload');
 });
 
-Route::get('/locale/{lang}', [App\Http\Controllers\LocaleController::class, 'index'])
+Route::get('/locale/{lang}', [LocaleController::class, 'index'])
     ->where('lang', '\w+')
     ->name('locale');
 

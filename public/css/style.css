@@ -20,11 +20,12 @@ svg{
     width: 50px!important;
 
 }
-.itemBigImgImg{
+.itemBigImg{
     margin-left: 20px!important;
-    width: 70px!important;
+    width: 140px!important;
 
 }
 .socialLink{
-    font-size: 28px;
+    font-size: 26px;
+    margin-right: 12px;
 }

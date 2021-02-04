@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-start">
                         <a class="socialLink" href="{{ route('social::login', 'vkontakte') }}">
                             <i class="fa fa-vk" aria-hidden="true"></i>
                         </a>
