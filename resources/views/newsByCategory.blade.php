@@ -8,13 +8,8 @@
         <div class="col-md-8">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('news::categories')}}">Выберете Категорию: </a></li>
-                    <ul>
-                        @foreach($categories as $category)
-                            <li><a href="{{ route('news::categoryId', ['id'=>$category->id]) }}">  {{$category->title}} </a></li>
-                        @endforeach
-                    </ul>
-                @if($id)
+                    <li class="breadcrumb-item"><a href="{{route('news::categories')}}">Все категории: </a></li>
+                    @if($id)
                         <li class="breadcrumb-item">
                             <a href="category_{{ $id ?? ''}}">{{\App\Models\NewsCategories::find($id)->title}}</a>
                         </li>
@@ -23,6 +18,8 @@
             </nav>
 
             <div class="list-group">
+                    <div class="col-md-12 list-group-item">
+                        <h4>{{ \App\Models\NewsCategories::find($id)->title }}</h4>
 
                         <div class="list-group">
                             @forelse($news as $item)
@@ -39,6 +36,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                <hr>
                             @empty
                                 Новостей нет!
                             @endforelse
@@ -46,6 +44,8 @@
                                     {{$news->links()}}
                                 </div>
                         </div>
+
+                    </div>
             </div>
         </div>
     </div>

@@ -4,21 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use App\Models\NewsCategories;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
 
 class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
         $news = News::query()
             ->orderBy('updated_at', 'desc')
-            ->paginate(10);
-        return view('news', ['news' => $news, 'id'=>0]);
+            ->paginate(4);
+        return view('news', ['news' => $news, 'categories' => NewsCategories::all(), 'id' => 0]);
     }
 
     public function showCategories(){
@@ -27,10 +30,12 @@ class NewsController extends Controller
 //        dd($categories);
         return view('newsCategories', ['categories'=>$categories]);
     }
+
     public function showNewsByCategory($id){
         $news = News::whereCategoryId($id)
-        ->get();
-        return view('news', ['news' => $news, 'id'=>$id]);
+            ->orderBy('updated_at', 'desc')
+            ->paginate(4);
+        return view('newsByCategory', ['news' => $news, 'id' =>$id]);
     }
 
     public function showNews($id){
@@ -103,4 +108,5 @@ class NewsController extends Controller
     {
         //
     }
+
 }

@@ -7,14 +7,19 @@ use App\Models\News;
 use App\Models\NewsCategories;
 use App\Models\Source;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use PHPUnit\Exception;
 
 class NewsController extends Controller
 {
     public function index(){
+//        foreach (NewsCategories::all() as $item){
+//            dump($item->title, News::where('category_id', $item->id)->count());
+//        }
         $news = News::query()
             ->orderBy('updated_at', 'desc')
-            ->paginate(5);
-        return view('admin', ['news' => $news]);
+            ->paginate(2);
+        return view('admin/news', ['news' => $news]);
     }
 
     public function createNews(){
@@ -27,17 +32,31 @@ class NewsController extends Controller
 
     public function saveNews(Request $request)
     {
+//        dd($request->file('file')->getFileInfo());
+
         $this->validate($request, News::createRules());
         $id = $request->post('id');
         $model = $id ? News::find($id) : new News();
+
+        if (is_file($request->file('file'))){
+            $request->file('file')->storeAs('public', $_FILES['file']['name']);
+            $url = \Storage::url($_FILES['file']['name']);
+            $message = 'Данные сохранены';
+        } else {
+            $url = $id ? News::find($id)->img_source : 'https://place-hold.it/100';
+            $message = 'Данные сохранены. Файл не выбран!';
+        }
+
         $model->fill([
             "title" => $request->post('title'),
             "category_id" => NewsCategories::whereTitle($request->post('category'))->value('id'),
             "text" => $request->post('text'),
-            "source_id" => Source::whereTitle($request->post('source'))->value('id')
+            "source_id" => Source::whereTitle($request->post('source'))->value('id'),
+            "img_source" => $url,
+            "build" => "by_admin"
         ])->save();
-        return redirect()->route("admin::updateNews", ['id' => $model->id])
-            ->with('success', "Данные сохранены");
+
+        return redirect()->route('admin::news')->with('success', $message);
     }
 
     public function updateNews($id)
@@ -51,7 +70,14 @@ class NewsController extends Controller
 
     public function deleteNews($id){
         News::destroy([$id]);
-        return redirect()->route("admin::index")
+        return redirect()->route("admin::news")
+            ->with('success', "Данные удалены");
+    }
+
+    public function deleteAllNews(){
+        News::select()->delete();
+        NewsCategories::select()->delete();
+        return redirect()->back()
             ->with('success', "Данные удалены");
     }
 
@@ -64,6 +90,7 @@ class NewsController extends Controller
     }
 
     public function saveCategory(Request $request){
+//        dd($request->has('check')); //проверка чекбокса на checked
         $id = $request->post('id');
         $model = $id ? NewsCategories::find($id) : new NewsCategories();
         $model->fill([

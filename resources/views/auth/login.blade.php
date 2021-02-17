@@ -2,10 +2,22 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-between">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">{{ __('Login') }}
+                    <div class="d-flex justify-content-start">
+                        <a class="socialLink" href="{{ route('social::login', 'vkontakte') }}">
+                            <i class="fa fa-vk" aria-hidden="true"></i>
+                        </a>
+                        <a class="socialLink" href="{{ route('social::login', ['provider'=>'github']) }}">
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                        </a>
+{{--                        <a class="socialLink" href="{{ route('social::login', ['provider'=>'facebook']) }}">--}}
+{{--                            <i class="fa fa-facebook" aria-hidden="true"></i>--}}
+{{--                        </a>--}}
+                    </div>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

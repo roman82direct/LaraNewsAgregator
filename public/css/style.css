@@ -1,0 +1,31 @@
+
+
+svg{
+    width: 100px;
+}
+
+.leading-5{
+    text-align: center;
+}
+.flex-1{
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+}
+.newsItem{
+    width: 100%;
+}
+.itemImg{
+    margin-left: 20px!important;
+    width: 50px!important;
+
+}
+.itemBigImg{
+    margin-left: 20px!important;
+    width: 140px!important;
+
+}
+.socialLink{
+    font-size: 26px;
+    margin-right: 12px;
+}
